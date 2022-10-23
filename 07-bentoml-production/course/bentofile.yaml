@@ -1,0 +1,10 @@
+service: "service.py:svc"
+labels:
+  owner: sergey.zemskov
+  project: test
+include:
+  - "*.py"
+python:
+  packages:
+    - xgboost
+    - sklearn
