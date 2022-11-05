@@ -72,6 +72,7 @@ def preprocess_data(data: pd.DataFrame):
     mean_monthly = X.MonthlyCharges.mean()
     mean_total = X[X.TotalCharges != " "].TotalCharges.astype(float).mean()
     total_ratio = mean_total / mean_monthly
+    joblib.dump(total_ratio, "TotalCharges_ratio.gz")
 
     X.TotalCharges = np.where(
         (X.TotalCharges == " ") | (X.TotalCharges == 0.0),
@@ -87,17 +88,17 @@ def preprocess_data(data: pd.DataFrame):
 def transform_data(X):
     transformer = FunctionTransformer(np.log1p)
     X["TotalCharges"] = transformer.fit_transform(X["TotalCharges"])
-    joblib.dump(transformer, 'log1p.gz')
+    joblib.dump(transformer, "log1p.gz")
     print(f"FunctionTransformer saved to 'log1p.gz'")
 
     scaler = StandardScaler()
     X[NUM_FEATURES] = scaler.fit_transform(X[NUM_FEATURES])
-    joblib.dump(scaler, 'scaler.gz')
+    joblib.dump(scaler, "scaler.gz")
     print(f"StandardScaler saved to 'scaler.gz'")
 
     encoder = OneHotEncoder(handle_unknown="error", drop="if_binary", sparse=False)
     train_ohe = encoder.fit_transform(X[CAT_FEATURES])
-    joblib.dump(scaler, 'encoder.gz')
+    joblib.dump(encoder, "encoder.gz")
     print(f"OneHotEncoder of categorical features saved to 'encoder.gz'")
 
     X[encoder.get_feature_names_out()] = train_ohe
@@ -114,7 +115,7 @@ def main(data_path="WA_Fn-UseC_-Telco-Customer-Churn.csv"):
     model = MODEL
     model.set_params(**HYPER_PARAMS)
     model.fit(X, y)
-    joblib.dump(model, 'model.gz')
+    joblib.dump(model, "model.gz")
     print(f"Fitted model saved to 'model.gz'")
 
     predictions = model.predict(X)
