@@ -70,7 +70,7 @@ def predict_endpoint():
 
         status = 200
         result = df[["customerID", TARGET]].set_index("customerID").to_dict()
-        print(result)
+        print(result)  # TODO: Add logger
     except Exception as e:
         print("Failed to predict")
         print(e)
