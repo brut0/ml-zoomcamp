@@ -5,13 +5,13 @@ import pandas as pd
 import requests
 
 FEATURES = [
-            'Temperature Vent right [°C]',
-        'Temperature Vent central right [°C]',
-        'Temperature Vent central left [°C]',
-        'Temperature Defrost lateral left [°C]',
-        'Temperature Defrost lateral right [°C]',
-        'Temperature Defrost central right [°C]',
-        'Temperature Defrost central left [°C]',
+    'Temperature Vent right [°C]',
+    'Temperature Vent central right [°C]',
+    'Temperature Vent central left [°C]',
+    'Temperature Defrost lateral left [°C]',
+    'Temperature Defrost lateral right [°C]',
+    'Temperature Defrost central right [°C]',
+    'Temperature Defrost central left [°C]',
     'Throttle [%]', 'Regenerative Braking Signal ',
     'Coolant Temperature Inlet [°C]', 'Battery Voltage [V]',
     'Elevation [m]', 'Cabin Temperature Sensor [°C]', 'Battery Current [A]',

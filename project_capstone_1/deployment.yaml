@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecar-temp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecar-temp
+  template:
+    metadata:
+      labels:
+        app: ecar-temp
+    spec:
+      containers:
+        - name: ecar-temp
+          image: battery-temp:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 8800

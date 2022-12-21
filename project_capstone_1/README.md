@@ -49,3 +49,12 @@ Response format of endpoint:
 Run just one simple command (be sure that train model before)
 
     docker compose up
+
+## Run as service in `kubectl`
+
+    kubectl apply -f deployment.yaml
+    kind load docker-image battery-temp:latest
+    kubectl apply -f service.yaml
+
+Example:  
+![alt text](https://i.ibb.co/Q9Y84dp/Screenshot-2022-12-22-023002.png)
